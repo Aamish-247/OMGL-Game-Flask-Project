@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+    body {
+        background-color: #121212;
+        color: #f8f9fa;
+        font-family: 'Orbitron', sans-serif;
+        overflow-x: hidden;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: repeating-linear-gradient(180deg, rgba(255,0,0,0.05) 0, rgba(255,0,0,0.05) 2px, transparent 2px, transparent 4px);
+        animation: glitchBg 0.3s infinite;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    @keyframes glitchBg {
+        0% { transform: translate(0, 0); }
+        20% { transform: translate(2px, -2px); }
+        40% { transform: translate(-2px, 2px); }
+        60% { transform: translate(1px, -1px); }
+        80% { transform: translate(-1px, 1px); }
+        100% { transform: translate(0, 0); }
+    }
+
+    h3 {
+        font-size: 2.2rem;
+        text-shadow: 0 0 10px red;
+        animation: pulse 2s infinite alternate;
+        margin-bottom: 1rem;
+    }
+
+    .form-control {
+        background-color: #1e1e1e;
+        color: white;
+        border: 1px solid red;
+    }
+
+    .form-control:focus {
+        background-color: #1e1e1e;
+        border-color: #ff0000;
+        box-shadow: 0 0 10px red;
+        color: white;
+    }
+
+    .btn-success {
+        background-color: #d00000;
+        border-color: #ff0000;
+        box-shadow: 0 0 15px red;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .btn-success:hover {
+        background-color: #ff0000;
+        color: black;
+        transform: scale(1.05);
+    }
+
+    @keyframes pulse {
+        from { text-shadow: 0 0 10px red; }
+        to { text-shadow: 0 0 30px #ff1a1a; }
+    }
+</style>
+<div class="container mt-5">
+    <h3>Interactive Scenario</h3>
+    <p style="white-space: pre-wrap; word-wrap: break-word;">{{ challenge.question | safe }}</p>
+    <form method="POST">
+        <input type="hidden" name="challenge_id" value="{{ challenge.id }}">
+        <input type="text" name="answer" class="form-control" placeholder="Enter your response..." required>
+        <button class="btn btn-success mt-4" type="submit">🚀 Submit</button>
+    </form>
+</div>
+{% endblock %}

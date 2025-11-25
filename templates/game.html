@@ -1,0 +1,231 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+    body {
+        background-color: #121212;
+        color: #f8f9fa;
+        font-family: 'Orbitron', sans-serif;
+        overflow-x: hidden;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: repeating-linear-gradient(180deg, rgba(255,0,0,0.05) 0, rgba(255,0,0,0.05) 2px, transparent 2px, transparent 4px);
+        animation: glitchBg 0.3s infinite;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    @keyframes glitchBg {
+        0% { transform: translate(0, 0); }
+        20% { transform: translate(2px, -2px); }
+        40% { transform: translate(-2px, 2px); }
+        60% { transform: translate(1px, -1px); }
+        80% { transform: translate(-1px, 1px); }
+        100% { transform: translate(0, 0); }
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        text-shadow: 0 0 8px red;
+        animation: pulse 2s infinite alternate;
+    }
+
+    .maze-grid {
+        margin-top: 20px;
+        border: 2px solid #ff0000;
+        padding: 10px;
+        box-shadow: 0 0 15px red;
+    }
+
+    .btn {
+        font-size: 1.2rem;
+        margin-right: 10px;
+    }
+
+    .btn-secondary, .btn-warning {
+        background-color: #7c0000;
+        border-color: #ff0000;
+        color: #fff;
+    }
+
+    .btn-secondary:hover, .btn-warning:hover {
+        background-color: #ff0000;
+        color: black;
+        transform: scale(1.05);
+    }
+
+    .score-panel {
+        background: rgba(40, 0, 0, 0.8);
+        border-left: 3px solid red;
+        padding: 20px;
+        height: 100%;
+        color: white;
+        box-shadow: inset 0 0 10px red;
+        animation: fadeIn 1s ease-in;
+    }
+    li[style*="animation: pulse"] {
+    box-shadow: 0 0 10px currentColor;
+}
+
+
+    @keyframes pulse {
+        from { text-shadow: 0 0 10px red; }
+        to { text-shadow: 0 0 30px #ff1a1a; }
+    }
+</style>
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Game Panel -->
+        <div class="col-md-9">
+            <h2>🧩 Maze Game</h2>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p><strong>User Earn Keys:</strong>
+                      <span id="key-count">{{ keys }}</span>
+                    </p>
+                </div>
+                <div class="col-sm-6">
+                    Key required for Unlock the Lock: <br> 🟩 2 Key | 🟥 4 Keys | 🟪 5 Keys | ⬛ 10 Keys
+                </div>
+            </div>
+            <p><strong>Time:</strong> <span id="dynamic-time"></span></p>
+            <div id="maze" class="maze-grid"></div>
+            <div class="mt-4">
+                <a href="{{ url_for('challenge', ctype='quiz') }}" class="btn btn-secondary">Quiz Game</a>
+                <a href="{{ url_for('challenge', ctype='code') }}" class="btn btn-secondary">Coding Game</a>
+                <a href="{{ url_for('challenge', ctype='scenario') }}" class="btn btn-secondary">Scenario Game</a>
+                <a href="{{ url_for('challenge', ctype='debug') }}" class="btn btn-secondary">Debug Game</a>
+                <a href="{{ url_for('sharp_shooter') }}" class="btn btn-warning">Sharp Shooter</a>
+                <a href="/" class="btn btn-light">❌ Exit Game</a>
+                
+            </div>
+        </div>
+
+        <!-- Score Panel -->
+        <div class="col-md-3 score-panel" style="margin-top: 140px; padding-bottom: 40px;">
+            <h4 class="text-danger">🏆 Top Scores</h4>
+            <ul class="list-unstyled mt-3">
+                {% for score in top_scores %}
+                    {% if loop.index == 1 %}
+                    <li style="color:#00bfff; font-weight:bold; animation: pulse 1s infinite; margin-bottom: 10px; border:2px solid #00bfff; border-radius:8px; padding:5px;">
+                        👑 {{ score.UserID }} - 🕒 {{ score.global_time }}s
+                    </li>
+                    {% elif loop.index == 2 %}
+                    <li style="color:#00ff7f; font-weight:bold; animation: pulse 1s infinite; margin-bottom: 10px; border:2px solid #00ff7f; border-radius:8px; padding:5px;">
+                        🥈 {{ score.UserID }} - 🕒 {{ score.global_time }}s
+                    </li>
+                    {% elif loop.index == 3 %}
+                    <li style="color:#ffa500; font-weight:bold; animation: pulse 1s infinite; margin-bottom: 10px; border:2px solid #ffa500; border-radius:8px; padding:5px;">
+                        🥉 {{ score.UserID }} - 🕒 {{ score.global_time }}s
+                    </li>
+                    {% else %}
+                    <li style="color:#ffffff; font-weight:bold; animation: pulse 1s infinite; margin-bottom: 10px; border:2px solid #f4f4f4; border-radius:8px; padding:5px;">
+                        🔹 {{ score.UserID }} - 🕒 {{ score.global_time }}s
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            
+        </div>
+    </div>
+        <div id="custom-alert-modal" style="
+        display: none; /* Keep this line */
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.7);
+        /* REMOVE THE LINE BELOW: display: flex; */
+        align-items: center;
+        justify-content: center;
+    ">
+        <div style="
+            background-color: #333;
+            color: white;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            border-radius: 8px;
+        ">
+            <p id="custom-alert-message"></p>
+            <button id="custom-alert-ok-btn" style="
+                background-color: #007bff;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                cursor: pointer;
+                border-radius: 5px;
+                margin-top: 15px;
+            ">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+<script id="initial-maze-layout" type="application/json">{{ maze_layout | safe }}</script>
+<script id="initial-player-pos" type="application/json">{{ player_pos | safe }}</script>
+<script>
+    const startTime = {{ global_time }};
+    const timeDisplay = document.getElementById('dynamic-time');
+    let seconds = startTime;
+    let timerInterval;
+
+    function formatTime(s) {
+        const minutes = Math.floor(s / 60);
+        const sec = s % 60;
+        return `${String(minutes).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+    }
+
+    function updateClock() {
+        timeDisplay.innerText = formatTime(seconds);
+        seconds++;
+    }
+
+    function startTimer() {
+        updateClock();
+        timerInterval = setInterval(updateClock, 1000);
+    }
+
+    function stopTimer() {
+        clearInterval(timerInterval);
+    }
+
+    startTimer();
+
+    // To be called when player reaches target
+    function onPlayerWin() {
+        stopTimer();
+        alert('🎉 You reached the target!');
+    }
+    // Function to show custom alert
+    function showCustomAlert(message) {
+        document.getElementById('custom-alert-message').innerText = message;
+        document.getElementById('custom-alert-modal').style.display = 'flex'; // Show modal
+    }
+
+    // Hide custom alert when OK button is clicked
+    document.getElementById('custom-alert-ok-btn').onclick = function() {
+        document.getElementById('custom-alert-modal').style.display = 'none'; // Hide modal
+    };
+
+    // Replace native alert calls with custom alert
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                showCustomAlert("{{ message | safe }}"); // Call custom alert
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</script>
+{% endblock %}

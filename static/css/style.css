@@ -1,0 +1,50 @@
+.maze-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    grid-template-rows: repeat(10, 40px);
+    gap: 2px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    border: 2px solid #aaa;
+    padding: 5px;
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+.empty {
+    background-color: #e6e6e6;
+}
+
+.wall {
+    background-color: #444;
+    color: white;
+}
+
+.player {
+    background-color: #007bff;
+    color: white;
+}
+
+.key {
+    background-color: gold;
+}
+
+.gate {
+    background-color: red;
+    color: white;
+}
+
+.target {
+    background-color: green;
+    color: white;
+}
