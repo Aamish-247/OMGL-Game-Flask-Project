@@ -3,7 +3,7 @@ const rows = 10, cols = 10;
 
 let playerPos = { row: 0, col: 0 };
 let playerKeys = parseInt(document.getElementById('key-count').innerText);
-let layout; // Declare layout here, it will be assigned either from session or newly generated
+let layout; 
 
 
 // Generate Random Maze Layout
@@ -22,9 +22,6 @@ function generateRandomLayout(rows, cols) {
         }
     };
 
-    // Place walls
-    // const wallCount = Math.floor(rows * cols * 0.3); // 30%
-    // placeRandomly('wall', wallCount);
 
     // Place keys and locks
     placeRandomly('lock-green', 18);
@@ -34,17 +31,6 @@ function generateRandomLayout(rows, cols) {
 
     // Place target
     layout[rows - 1][cols - 1] = 'target';
-
-    // Place player and set playerPos
-    // let pr, pc;
-    // do {
-    //     pr = Math.floor(Math.random() * rows);
-    //     pc = Math.floor(Math.random() * cols);
-    // } while (layout[pr][pc] !== 'empty');
-    // layout[pr][pc] = 'player';
-    // playerPos = { row: pr, col: pc };
-
-    // return layout;
 
     layout[0][0] = 'player';
     playerPos = { row: 0, col: 0 };
@@ -133,7 +119,6 @@ function movePlayer(dirRow, dirCol) {
 
     let nextCell = layout[newRow][newCol];
 
-    // if (nextCell === 'wall') return;
 
     if (nextCell.startsWith('lock')) {
         const cost = getLockCost(nextCell);

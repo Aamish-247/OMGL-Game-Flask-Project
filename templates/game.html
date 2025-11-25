@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <style>
+    /* Default Body Styles */
     body {
         background-color: #121212;
         color: #f8f9fa;
@@ -8,6 +9,7 @@
         overflow-x: hidden;
     }
 
+    /* Glitch Background Effect */
     body::before {
         content: "";
         position: fixed;
@@ -30,22 +32,124 @@
         100% { transform: translate(0, 0); }
     }
 
-    h2 {
-        font-size: 2.5rem;
-        text-shadow: 0 0 8px red;
-        animation: pulse 2s infinite alternate;
+    /* --- New & Modified Styles for Centering and Sizing --- */
+
+    /* Main Centering Wrapper */
+    .game-wrapper {
+        display: flex;
+        justify-content: center; /* Horizontally center the content */
+        align-items: flex-start; /* Vertically align to the top */
+        width: 100%;
+        min-height: 50vh; 
     }
 
+    /* Game Panel Adjustments (Bigger Size) */
+    .game-panel {
+        width: 90%; /* Use 90% of the screen width */
+        max-width: 900px; /* Max width set to 900px */
+        margin-top: -15px; 
+        text-align: center; 
+        padding: 0 15px; /* Add padding for mobile view */
+        
+        position: relative; /* <--- Zaroori hai: Background text ko position karne ke liye */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* --- NEW STYLE FOR BACKGROUND TEXT --- */
+/* --- .background-text1 --- */
+.background-text1 {
+    position: absolute;
+    top: 50%;
+    right: 60%;
+    transform: translate(-50%, -50%);
+    
+    font-size: 10rem;
+    font-weight: bold;
+    white-space: nowrap;
+    opacity: 0.50; 
+    font-family: Verdana, Geneva, sans-serif !important;
+    font-style: italic;
+    color: rgb(255, 248, 248); 
+    
+    /* UPDATED: Multiple Shadows for Neon Glow */
+    text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.5), 
+        0 0 20px rgba(255, 0, 0, 0.8),    
+        0 0 40px rgba(255, 0, 0, 0.4) !important; 
+    
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* --- .background-text2 --- */
+.background-text2 {
+    position: absolute;
+    top: 50%;
+    left: 115%;
+    transform: translate(-50%, -50%);
+    
+    font-size: 10rem;
+    font-weight: bold;
+    white-space: nowrap;
+    opacity: 0.50; 
+    font-family: Verdana, Geneva, sans-serif !important;
+    font-style: italic;
+    color: rgb(255, 248, 248); 
+    
+    /* UPDATED: Multiple Shadows for Neon Glow */
+    text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.5), 
+        0 0 20px rgba(255, 0, 0, 0.8),    
+        0 0 40px rgba(255, 0, 0, 0.4) !important;
+        
+    pointer-events: none;
+    z-index: 0;
+}
+    /* Header Info (Keys/Time) Alignment */
+    .header-info-row {
+        display: flex;
+        justify-content: space-between; 
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+        z-index: 1; /* Ensure this content is above the background text */
+        position: relative; /* Positioning context for z-index to work */
+    }
+    
+    .header-info-row > div {
+        min-width: 40%; 
+    }
+
+    .key-requirements {
+        text-align: right !important; 
+        white-space: nowrap;
+        line-height: 200%;
+    }
+
+
+    /* Maze Grid Styling (Bigger Container) */
     .maze-grid {
-        margin-top: 20px;
         border: 2px solid #ff0000;
         padding: 10px;
         box-shadow: 0 0 15px red;
+        width: 100%; 
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        z-index: 1; /* Ensure this content is above the background text */
+        position: relative;
     }
 
+    /* Button Styling */
     .btn {
         font-size: 1.2rem;
-        margin-right: 10px;
+        margin: 5px;
     }
 
     .btn-secondary, .btn-warning {
@@ -57,85 +161,64 @@
     .btn-secondary:hover, .btn-warning:hover {
         background-color: #ff0000;
         color: black;
-        transform: scale(1.05);
+        transform: scale(1);
     }
 
-    .score-panel {
-        background: rgba(40, 0, 0, 0.8);
-        border-left: 3px solid red;
-        padding: 20px;
-        height: 100%;
-        color: white;
-        box-shadow: inset 0 0 10px red;
-        animation: fadeIn 1s ease-in;
-    }
     li[style*="animation: pulse"] {
-    box-shadow: 0 0 10px currentColor;
-}
-
+        box-shadow: 0 0 10px currentColor;
+    }
 
     @keyframes pulse {
         from { text-shadow: 0 0 10px red; }
         to { text-shadow: 0 0 30px #ff1a1a; }
     }
+
+    /* Button Container Centering */
+    .button-group {
+        text-align: center; 
+        margin-top: 20px;
+        z-index: 1; /* Ensure this content is above the background text */
+        position: relative;
+        white-space: nowrap;
+    }
 </style>
 <div class="container-fluid mt-4">
-    <div class="row">
-        <!-- Game Panel -->
-        <div class="col-md-9">
-            <h2>🧩 Maze Game</h2>
-            <div class="row">
+    <div class="game-wrapper">
+        <div class="game-panel">
+            
+            <div class="background-text1">
+                    MAZE
+            </div>
+            <div class="background-text2">
+                    GAME
+            </div>
+            <div class="row header-info-row">
                 <div class="col-sm-6">
                     <p><strong>User Earn Keys:</strong>
-                      <span id="key-count">{{ keys }}</span>
+                        <span id="key-count">{{ keys }}</span>
                     </p>
+                    <p><strong>Time:</strong> <span id="dynamic-time"></span></p>
                 </div>
-                <div class="col-sm-6">
-                    Key required for Unlock the Lock: <br> 🟩 2 Key | 🟥 4 Keys | 🟪 5 Keys | ⬛ 10 Keys
+                <div class="col-sm-6 key-requirements">
+                    Key required for Unlock the Lock: <br> 
+                    🟩 2 Key | 🟥 4 Keys | 🟪 5 Keys | ⬛ 10 Keys
                 </div>
             </div>
-            <p><strong>Time:</strong> <span id="dynamic-time"></span></p>
+            
             <div id="maze" class="maze-grid"></div>
-            <div class="mt-4">
+            
+            <div class="mt-4 button-group">
                 <a href="{{ url_for('challenge', ctype='quiz') }}" class="btn btn-secondary">Quiz Game</a>
                 <a href="{{ url_for('challenge', ctype='code') }}" class="btn btn-secondary">Coding Game</a>
                 <a href="{{ url_for('challenge', ctype='scenario') }}" class="btn btn-secondary">Scenario Game</a>
                 <a href="{{ url_for('challenge', ctype='debug') }}" class="btn btn-secondary">Debug Game</a>
                 <a href="{{ url_for('sharp_shooter') }}" class="btn btn-warning">Sharp Shooter</a>
                 <a href="/" class="btn btn-light">❌ Exit Game</a>
-                
             </div>
         </div>
-
-        <!-- Score Panel -->
-        <div class="col-md-3 score-panel" style="margin-top: 140px; padding-bottom: 40px;">
-            <h4 class="text-danger">🏆 Top Scores</h4>
-            <ul class="list-unstyled mt-3">
-                {% for score in top_scores %}
-                    {% if loop.index == 1 %}
-                    <li style="color:#00bfff; font-weight:bold; animation: pulse 1s infinite; margin-bottom: 10px; border:2px solid #00bfff; border-radius:8px; padding:5px;">
-                        👑 {{ score.UserID }} - 🕒 {{ score.global_time }}s
-                    </li>
-                    {% elif loop.index == 2 %}
-                    <li style="color:#00ff7f; font-weight:bold; animation: pulse 1s infinite; margin-bottom: 10px; border:2px solid #00ff7f; border-radius:8px; padding:5px;">
-                        🥈 {{ score.UserID }} - 🕒 {{ score.global_time }}s
-                    </li>
-                    {% elif loop.index == 3 %}
-                    <li style="color:#ffa500; font-weight:bold; animation: pulse 1s infinite; margin-bottom: 10px; border:2px solid #ffa500; border-radius:8px; padding:5px;">
-                        🥉 {{ score.UserID }} - 🕒 {{ score.global_time }}s
-                    </li>
-                    {% else %}
-                    <li style="color:#ffffff; font-weight:bold; animation: pulse 1s infinite; margin-bottom: 10px; border:2px solid #f4f4f4; border-radius:8px; padding:5px;">
-                        🔹 {{ score.UserID }} - 🕒 {{ score.global_time }}s
-                    </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-            
-        </div>
     </div>
-        <div id="custom-alert-modal" style="
-        display: none; /* Keep this line */
+    <div id="custom-alert-modal" style="
+        display: none; 
         position: fixed;
         z-index: 1000;
         left: 0;
@@ -144,7 +227,6 @@
         height: 100%;
         overflow: auto;
         background-color: rgba(0,0,0,0.7);
-        /* REMOVE THE LINE BELOW: display: flex; */
         align-items: center;
         justify-content: center;
     ">
@@ -171,7 +253,6 @@
             ">OK</button>
         </div>
     </div>
-</div>
 </div>
 <script id="initial-maze-layout" type="application/json">{{ maze_layout | safe }}</script>
 <script id="initial-player-pos" type="application/json">{{ player_pos | safe }}</script>
@@ -220,7 +301,7 @@
     };
 
     // Replace native alert calls with custom alert
-    {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages()%}
         {% if messages %}
             {% for message in messages %}
                 showCustomAlert("{{ message | safe }}"); // Call custom alert
