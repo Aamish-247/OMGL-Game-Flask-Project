@@ -6,7 +6,6 @@ let playerKeys = parseInt(document.getElementById('key-count').innerText);
 let layout; 
 
 
-// Generate Random Maze Layout
 function generateRandomLayout(rows, cols) {
     const layout = Array.from({ length: rows }, () => Array(cols).fill('empty'));
 
@@ -22,14 +21,11 @@ function generateRandomLayout(rows, cols) {
         }
     };
 
-
-    // Place keys and locks
     placeRandomly('lock-green', 18);
     placeRandomly('lock-red', 15);
     placeRandomly('lock-purple', 12);
     placeRandomly('lock-black', 5);
 
-    // Place target
     layout[rows - 1][cols - 1] = 'target';
 
     layout[0][0] = 'player';
@@ -38,23 +34,17 @@ function generateRandomLayout(rows, cols) {
     return layout;
 }
 
-// layout = generateRandomLayout(rows, cols);
-
-// Get initial maze state from Flask template
 const initialMazeLayoutString = document.getElementById('initial-maze-layout').innerText;
 const initialPlayerPosString = document.getElementById('initial-player-pos').innerText;
 
-// Conditionally load saved layout or generate a new one
+
 if (initialMazeLayoutString && initialMazeLayoutString !== 'null') {
     layout = JSON.parse(initialMazeLayoutString);
     playerPos = JSON.parse(initialPlayerPosString);
-    // Ensure player object is at its last known position (it might have been 'empty' in saved layout)
     layout[playerPos.row][playerPos.col] = 'player';
 } else {
-    // Maze is generated for the first time
     layout = generateRandomLayout(rows, cols);
-    // IMPORTANT CHANGE: Immediately send this newly generated maze state to the server
-    sendMazeStateToServer(); // <--- ADD THIS LINE
+    sendMazeStateToServer(); 
 }
 
 
@@ -77,7 +67,7 @@ function renderMaze() {
             const type = layout[i][j];
             cell.classList.add(type);
 
-            // Show appropriate emoji
+            
             switch (type) {
                 case 'player': cell.innerText = '🧍'; break;
                 case 'target': cell.innerText = '🏁'; break;
@@ -151,14 +141,11 @@ function movePlayer(dirRow, dirCol) {
         }).then(res => res.json())
         .then(data => {
             console.log(data.message);
-            // After successfully saving progress, redirect to the end game page
-            window.location.href = '/end'; // <<<--- ADD THIS LINE
+            window.location.href = '/end'; 
         })
         .catch(err => {
             console.error('Error saving progress:', err);
-            // Decide if you still want to redirect even if saving fails.
-            // For a smooth user experience, you might still redirect.
-            window.location.href = '/end'; // <<<--- OR ADD THIS LINE HERE
+            window.location.href = '/end';
         });
     }
 
@@ -166,7 +153,7 @@ function movePlayer(dirRow, dirCol) {
     playerPos = { row: newRow, col: newCol };
     layout[playerPos.row][playerPos.col] = 'player';
     renderMaze();
-    sendMazeStateToServer(); // Send updated state after every valid move
+    sendMazeStateToServer(); 
 }
 
 document.addEventListener('keydown', (e) => {
