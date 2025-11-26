@@ -1,15 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
 <style>
-    /* Default Body Styles */
     body {
         background-color: #121212;
         color: #f8f9fa;
         font-family: 'Orbitron', sans-serif;
         overflow-x: hidden;
     }
-
-    /* Glitch Background Effect */
     body::before {
         content: "";
         position: fixed;
@@ -31,19 +28,13 @@
         80% { transform: translate(-1px, 1px); }
         100% { transform: translate(0, 0); }
     }
-
-    /* --- New & Modified Styles for Centering and Sizing --- */
-
-    /* Main Centering Wrapper */
     .game-wrapper {
         display: flex;
-        justify-content: center; /* Horizontally center the content */
-        align-items: flex-start; /* Vertically align to the top */
+        justify-content: center; 
+        align-items: flex-start; 
         width: 100%;
         min-height: 50vh; 
     }
-
-    /* Game Panel Adjustments (Bigger Size) */
     .game-panel {
         width: 90%; /* Use 90% of the screen width */
         max-width: 900px; /* Max width set to 900px */
