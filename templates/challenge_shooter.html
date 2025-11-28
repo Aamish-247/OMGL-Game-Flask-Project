@@ -73,8 +73,8 @@
         transform: scale(1.05);
     }
     select option[value=""] {
-    color: gray; /* Change text color */
-    opacity: 0.5; /* Reduce opacity */
+    color: gray; 
+    opacity: 0.5; 
     }
     #timer {
         font-size: 1.5rem;
@@ -95,9 +95,7 @@
     <p style="white-space: pre-wrap; word-wrap: break-word;">{{ challenge.question | safe }}</p>
 
     <form method="POST">
-        <!-- Dynamically Render Inputs -->
         {% if challenge.type == "quiz" %}
-    <!-- Quiz Challenge: Show 4 Radio Button Options -->
             {% for option in challenge.options %}
                 <div class="form-check" style="display: block; margin-bottom: 10px;">
                     <input 
@@ -115,7 +113,6 @@
                 </div>
             {% endfor %}
         {% elif challenge.type == "debug" %}
-            <!-- Debug Challenge: Show Text Box and Dropdown -->
             <input 
                 type="text" 
                 name="answer" 
@@ -130,7 +127,6 @@
                 <option value="logical">Logical Error</option>
             </select>
         {% else %}
-            <!-- General Challenges: Single Input Box -->
             <input 
                 type="text" 
                 name="answer" 
@@ -139,37 +135,30 @@
                 required
             >
         {% endif %}
-
-        <!-- Timer Display -->
         <p id="timer" class="text-danger font-weight-bold mt-3">20 seconds remaining</p>
-
-        <!-- Submit Button -->
         <button class="btn btn-danger mt-4" type="submit">🎯 Submit</button>
     </form>
 </div>
 
 <script>
-   // Timer Logic
-let timeLeft = 20; // Timer duration in seconds
+let timeLeft = 20; 
 const timerDisplay = document.getElementById('timer');
 
 
-// Countdown Timer
 const countdown = setInterval(() => {
     if (timeLeft <= 0) {
         clearInterval(countdown);
         alert("⏰ Time's up! Returning to the maze...");
-        window.location.href = "/maze"; // Redirect to maze
+        window.location.href = "/maze"; 
     } else {
         timerDisplay.innerText = `${timeLeft} seconds remaining`;
         timeLeft--;
     }
 }, 1000);
 
-// Clear the timer if the form is submitted
 const form = document.querySelector('form');
 form.addEventListener('submit', () => {
-    clearInterval(countdown); // Stop the timer
+    clearInterval(countdown); 
 });
 </script>
 {% endblock %}
