@@ -15,7 +15,6 @@ def get_db_connection():
         database='omgl_db',
         cursorclass=pymysql.cursors.DictCursor
     )
-
 @app.route('/')
 def index():
     return render_template('index.html')
