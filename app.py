@@ -190,25 +190,6 @@ def end_game():
     session.pop('keys', None) 
     return render_template('end.html', total_time=total_time, keys=final_keys)
 
-@app.route('/save_progress', methods=['POST'])
-def save_progress():
-    data = request.get_json()
-    user_id = data.get('user_id')
-    userkeys = data.get('userkeys')
-    global_time = data.get('global_time')
-    completed_challenges = data.get('completed_challenges')
-
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute("""
-        INSERT INTO user_progress (UserID, userkeys, global_time, completed_challenges)
-        VALUES (%s, %s, %s, %s)
-    """, (user_id, userkeys, global_time, completed_challenges))
-    conn.commit()
-    conn.close()
-
-    return jsonify({'message': '✅ Progress saved successfully!'})
-
 @app.route('/update_maze_state', methods=['POST'])
 def update_maze_state():
     data = request.get_json()

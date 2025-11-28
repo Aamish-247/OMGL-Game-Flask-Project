@@ -36,69 +36,68 @@
         min-height: 50vh; 
     }
     .game-panel {
-        width: 90%; /* Use 90% of the screen width */
-        max-width: 900px; /* Max width set to 900px */
+        width: 90%; 
+        max-width: 900px;
         margin-top: -15px; 
         text-align: center; 
-        padding: 0 15px; /* Add padding for mobile view */
+        padding: 0 15px;
         
-        position: relative; /* <--- Zaroori hai: Background text ko position karne ke liye */
+        position: relative; 
         display: flex;
         flex-direction: column;
         align-items: center;
     }
     
-    /* --- NEW STYLE FOR BACKGROUND TEXT --- */
-/* --- .background-text1 --- */
-.background-text1 {
-    position: absolute;
-    top: 50%;
-    right: 60%;
-    transform: translate(-50%, -50%);
+  
+    .background-text1 {
+        position: absolute;
+        top: 50%;
+        right: 60%;
+        transform: translate(-50%, -50%);
     
-    font-size: 10rem;
-    font-weight: bold;
-    white-space: nowrap;
-    opacity: 0.50; 
-    font-family: Verdana, Geneva, sans-serif !important;
-    font-style: italic;
-    color: rgb(255, 248, 248); 
-    
-    /* UPDATED: Multiple Shadows for Neon Glow */
-    text-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.5), 
-        0 0 20px rgba(255, 0, 0, 0.8),    
-        0 0 40px rgba(255, 0, 0, 0.4) !important; 
-    
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* --- .background-text2 --- */
-.background-text2 {
-    position: absolute;
-    top: 50%;
-    left: 115%;
-    transform: translate(-50%, -50%);
-    
-    font-size: 10rem;
-    font-weight: bold;
-    white-space: nowrap;
-    opacity: 0.50; 
-    font-family: Verdana, Geneva, sans-serif !important;
-    font-style: italic;
-    color: rgb(255, 248, 248); 
-    
-    /* UPDATED: Multiple Shadows for Neon Glow */
-    text-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.5), 
-        0 0 20px rgba(255, 0, 0, 0.8),    
-        0 0 40px rgba(255, 0, 0, 0.4) !important;
+        font-size: 10rem;
+        font-weight: bold;
+        white-space: nowrap;
+        opacity: 0.50; 
+        font-family: Verdana, Geneva, sans-serif !important;
+        font-style: italic;
+        color: rgb(255, 248, 248); 
         
-    pointer-events: none;
-    z-index: 0;
-}
-    /* Header Info (Keys/Time) Alignment */
+        
+        text-shadow: 
+            0 0 10px rgba(255, 255, 255, 0.5), 
+            0 0 20px rgba(255, 0, 0, 0.8),    
+            0 0 40px rgba(255, 0, 0, 0.4) !important; 
+        
+        pointer-events: none;
+        z-index: 0;
+    }
+
+
+    .background-text2 {
+        position: absolute;
+        top: 50%;
+        left: 115%;
+        transform: translate(-50%, -50%);
+        
+        font-size: 10rem;
+        font-weight: bold;
+        white-space: nowrap;
+        opacity: 0.50; 
+        font-family: Verdana, Geneva, sans-serif !important;
+        font-style: italic;
+        color: rgb(255, 248, 248); 
+        
+        
+        text-shadow: 
+            0 0 10px rgba(255, 255, 255, 0.5), 
+            0 0 20px rgba(255, 0, 0, 0.8),    
+            0 0 40px rgba(255, 0, 0, 0.4) !important;
+            
+        pointer-events: none;
+        z-index: 0;
+    }
+    
     .header-info-row {
         display: flex;
         justify-content: space-between; 
@@ -109,8 +108,8 @@
         margin-left: auto;
         margin-right: auto;
         text-align: left;
-        z-index: 1; /* Ensure this content is above the background text */
-        position: relative; /* Positioning context for z-index to work */
+        z-index: 1; 
+        position: relative; 
     }
     
     .header-info-row > div {
@@ -124,7 +123,7 @@
     }
 
 
-    /* Maze Grid Styling (Bigger Container) */
+    
     .maze-grid {
         border: 2px solid #ff0000;
         padding: 10px;
@@ -133,11 +132,11 @@
         max-width: 600px;
         margin-left: auto;
         margin-right: auto;
-        z-index: 1; /* Ensure this content is above the background text */
+        z-index: 1; 
         position: relative;
     }
 
-    /* Button Styling */
+    
     .btn {
         font-size: 1.2rem;
         margin: 5px;
@@ -164,11 +163,11 @@
         to { text-shadow: 0 0 30px #ff1a1a; }
     }
 
-    /* Button Container Centering */
+    
     .button-group {
         text-align: center; 
         margin-top: 20px;
-        z-index: 1; /* Ensure this content is above the background text */
+        z-index: 1; 
         position: relative;
         white-space: nowrap;
     }
@@ -248,7 +247,7 @@
 <script id="initial-maze-layout" type="application/json">{{ maze_layout | safe }}</script>
 <script id="initial-player-pos" type="application/json">{{ player_pos | safe }}</script>
 <script>
-    const startTime = {{ global_time }};
+    const startTime = parseInt("{{ global_time | default(0) }}") || 0;
     const timeDisplay = document.getElementById('dynamic-time');
     let seconds = startTime;
     let timerInterval;
@@ -289,7 +288,7 @@
         document.getElementById('custom-alert-modal').style.display = 'none'; 
     };
 
-    {% with messages = get_flashed_messages()%}
+    {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
                 showCustomAlert("{{ message | safe }}"); 
