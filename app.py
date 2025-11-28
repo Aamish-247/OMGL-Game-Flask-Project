@@ -189,6 +189,8 @@ def end_game():
     session.pop('keys', None) 
     return render_template('end.html', total_time=total_time, keys=final_keys)
 
+
+
 @app.route('/update_maze_state', methods=['POST'])
 def update_maze_state():
     data = request.get_json()
