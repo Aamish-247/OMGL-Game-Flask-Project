@@ -55,12 +55,13 @@ def maze():
 
 @app.route('/challenge/<ctype>', methods=['GET', 'POST'])
 def challenge(ctype):
-    
+
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM challenges WHERE type=%s", (ctype,))
     challenges = cursor.fetchall()
     conn.close()
+
     unused_before_post = [c for c in challenges if c['id'] not in session['completed']]
 
     if request.method == 'POST':
@@ -74,6 +75,7 @@ def challenge(ctype):
 
         is_correct = False
         if ctype == 'debug':
+            
             error_type = request.form.get('error_type', '').strip().lower()
             user_answer = f"{answer.strip().lower()}{error_type}"
             correct_answer = challenge_for_feedback['correct_answer'].strip().lower()
