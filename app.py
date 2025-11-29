@@ -112,6 +112,7 @@ def challenge(ctype):
 
 @app.route('/sharpshooter', methods=['GET', 'POST'])
 def sharp_shooter():
+
     conn = get_db_connection()
     cursor = conn.cursor()
 
@@ -132,6 +133,7 @@ def sharp_shooter():
 
 
     elif request.method == 'POST':
+
         answer = request.form.get('answer')
         challenge_id = session.get('current_challenge')
         challenge_type = session.get('challenge_type')
@@ -186,8 +188,8 @@ def open_gate(required_keys):
 
 @app.route('/end')
 def end_game():
-    total_time = int(time.time() - session['start_time'] + session['global_time'])
 
+    total_time = int(time.time() - session['start_time'] + session['global_time'])
     final_keys = session.get('keys', 0)
     session.pop('maze_layout', None) 
     session.pop('player_pos', None) 
