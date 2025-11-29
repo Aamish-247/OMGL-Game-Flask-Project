@@ -105,6 +105,7 @@ def challenge(ctype):
     return render_template(f'challenge_{ctype}.html', challenge=challenge)
 
 
+
 @app.route('/sharpshooter', methods=['GET', 'POST'])
 def sharp_shooter():
     conn = get_db_connection()
