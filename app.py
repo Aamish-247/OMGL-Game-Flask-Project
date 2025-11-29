@@ -55,6 +55,7 @@ def maze():
 
 @app.route('/challenge/<ctype>', methods=['GET', 'POST'])
 def challenge(ctype):
+    
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM challenges WHERE type=%s", (ctype,))
@@ -65,6 +66,7 @@ def challenge(ctype):
     if request.method == 'POST':
         answer = request.form.get('answer')
         current_challenge_id = request.form.get('challenge_id')
+
         challenge_for_feedback = next((c for c in challenges if str(c['id']) == current_challenge_id), None)
 
         if not challenge_for_feedback:
