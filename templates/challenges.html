@@ -10,6 +10,7 @@
 <body style="background-color:#111; color:white;">
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
   <div class="container-fluid">
     <a class="navbar-brand text-danger" href="/">Admin</a>
     <div class="collapse navbar-collapse">
@@ -40,7 +41,7 @@
     <table class="table table-dark table-striped">
         <thead>
           <tr>
-            <th>ID</th><th>Type</th><th>Question</th><th>Options</th><th>Answer</th><th>Keys</th><th>Actions</th>
+            <th>ID</th><th>Type</th><th>Question</th><th>Options</th><th>Answer.</th><th>Keys</th><th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -56,6 +57,7 @@
               <td><input name="reward_keys" value="{{ c['reward_keys'] }}" class="form-control form-control-sm bg-dark text-light" type="number"></td>
               <td><button class="btn btn-sm btn-danger">Update</button></td>
             </form>
+
           </tr>
           {% endfor %}
         </tbody>
