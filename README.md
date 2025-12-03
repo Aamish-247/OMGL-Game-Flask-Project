@@ -3,7 +3,7 @@
 [![Flask Version](https://img.shields.io/badge/Flask-2.0.1-blue)](https://flask.palletsprojects.com/)
 [![Python Version](https://img.shields.io/badge/Python-3.9-blue.svg)](https://www.python.org/)
 
-Welcome to **OMGL (One More Gate Locked)**! 🚀 This is a fun and interactive web-based maze game built with Flask. Navigate through the maze, solve various challenges to collect keys 🔑, and unlock gates to find your way out. Race against the clock ⏰ and compete for a top spot on the leaderboard!
+Welcome to **OMGL (Online Maze Game for Learning)**! 🚀 This is a fun and interactive web-based maze game built with Flask. Navigate through the maze, solve various challenges to collect keys 🔑, and unlock gates to find your way out. Race against the clock ⏰ and compete for a top spot on the leaderboard!
 
 ## ✨ Features
 
@@ -11,7 +11,7 @@ Welcome to **OMGL (One More Gate Locked)**! 🚀 This is a fun and interactive w
 - **🧠 Multiple Challenge Types**: Test your skills with a variety of challenges:
   - **❓ Quiz**: Answer multiple-choice questions on various topics.
   - **💻 Code**: Solve coding-related questions.
-  - ** Scenario**: Analyze scenarios and find the correct solution.
+  - **Scenario**: Analyze scenarios and find the correct solution.
   - **🐞 Debug**: Identify and fix errors in code snippets.
   - **🎯 Sharpshooter**: A time-based challenge to quickly answer questions.
 - **🔑 Key Collection**: Earn keys by successfully completing challenges.
@@ -82,13 +82,9 @@ python app.py
 Open your web browser and go to `http://127.0.0.1:5000` to start playing!
 
 ## 📸 Screenshots
-
-*(You can add screenshots of your game here to make your README even more appealing!)*
-
-**Example:**
-| Game Screen | Challenge Screen |
+| Game Screen |
 | :---: | :---: |
-| ![Game Screen](link-to-your-screenshot.png) | ![Challenge Screen](link-to-your-screenshot.png) |
+| ![Game Screen](D:\fyp_omgl_game\OMGL_Complete_Flask_Game\game interface.PNG) | 
 
 
 ## 🙏 Contributing
