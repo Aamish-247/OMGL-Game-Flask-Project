@@ -83,9 +83,11 @@ Open your web browser and go to `http://127.0.0.1:5000` to start playing!
 
 
 ## 📸 Screenshots
+
 | Game Screen |
-| :---: | :---: |
+| :---------: |
 | ![Game Screen](static/game_interface.png) |
+
 
 
 ## 🙏 Contributing
