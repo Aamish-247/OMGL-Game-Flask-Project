@@ -86,7 +86,7 @@ Open your web browser and go to `http://127.0.0.1:5000` to start playing!
 
 | Game Screen |
 | :---------: |
-| ![Game Screen](D:\fyp_omgl_game\OMGL_Complete_Flask_Game\static\game interface.PNG) |
+| ![Game Screen](static/game interface.PNG) |
 
 
 
