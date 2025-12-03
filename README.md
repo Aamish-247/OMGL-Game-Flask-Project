@@ -86,7 +86,8 @@ Open your web browser and go to `http://127.0.0.1:5000` to start playing!
 
 | Game Screen |
 | :---------: |
-| ![Game Screen](game interface.PNG) |
+| <img src="game_interface.png" width="700"> |
+
 
 
 
