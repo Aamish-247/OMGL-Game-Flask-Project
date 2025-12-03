@@ -2,7 +2,6 @@
 
 [![Flask Version](https://img.shields.io/badge/Flask-2.0.1-blue)](https://flask.palletsprojects.com/)
 [![Python Version](https://img.shields.io/badge/Python-3.9-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 Welcome to **OMGL (One More Gate Locked)**! 🚀 This is a fun and interactive web-based maze game built with Flask. Navigate through the maze, solve various challenges to collect keys 🔑, and unlock gates to find your way out. Race against the clock ⏰ and compete for a top spot on the leaderboard!
 
@@ -12,13 +11,12 @@ Welcome to **OMGL (One More Gate Locked)**! 🚀 This is a fun and interactive w
 - **🧠 Multiple Challenge Types**: Test your skills with a variety of challenges:
   - **❓ Quiz**: Answer multiple-choice questions on various topics.
   - **💻 Code**: Solve coding-related questions.
-  - ** сценаario**: Analyze scenarios and find the correct solution.
+  - ** Scenario**: Analyze scenarios and find the correct solution.
   - **🐞 Debug**: Identify and fix errors in code snippets.
   - **🎯 Sharpshooter**: A time-based challenge to quickly answer questions.
 - **🔑 Key Collection**: Earn keys by successfully completing challenges.
 - **🚪 Gate Unlocking**: Use your collected keys to open gates and progress through the maze.
 - **⏱️ Time Tracking**: Your time is recorded, and every wrong answer adds a penalty.
-- **🏆 Leaderboard**: See if you can make it to the top 10 players with the fastest times.
 - **🔒 Session Management**: Your game progress is saved in a session.
 
 ## 🕹️ Gameplay
@@ -29,13 +27,12 @@ Welcome to **OMGL (One More Gate Locked)**! 🚀 This is a fun and interactive w
 4.  **Solve Challenges**: Answer the questions correctly to earn keys.
 5.  **Unlock Gates**: Use your keys to unlock gates that block your path.
 6.  **Reach the End**: Find the exit of the maze as quickly as possible.
-7.  **Check the Leaderboard**: See how you rank against other players.
 
 ## 🛠️ Technologies Used
 
 - **Backend**: Flask (Python)
 - **Frontend**: HTML, CSS, JavaScript
-- **Database**: MySQL (with `pymysql` driver)
+- **Database**: MySQL (with `Xampp`)
 
 ## 🚀 Setup and Installation
 
@@ -66,20 +63,11 @@ To get the game up and running on your local machine, follow these steps:
     ```bash
     pip install -r requirements.txt
     ```
-    *(Note: You'll need to create a `requirements.txt` file. See the section below.)*
-
-### Create `requirements.txt`
-
-Create a `requirements.txt` file in the root of the project with the following content:
-
-```
-Flask
-PyMySQL
-```
 
 ## 🗄️ Database Setup
 
-1.  **Install MySQL**: Make sure you have a MySQL server installed and running.
+1.  **Install Xampp**: Make sure you have a Xampp server installed and running.
+2.  **Open Phpadmin**: Browse on Php admin and make sure server is connected.
 2.  **Create the Database**: Create a new database named `omgl_db`.
 3.  **Import the SQL File**: Import the `omgl_db.sql` file into your `omgl_db` database. This will create the necessary tables (`challenges` and `user_progress`) and populate them with initial data.
 
