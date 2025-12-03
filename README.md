@@ -81,10 +81,11 @@ python app.py
 
 Open your web browser and go to `http://127.0.0.1:5000` to start playing!
 
+
 ## 📸 Screenshots
 | Game Screen |
 | :---: | :---: |
-| ![Game Screen](D:\fyp_omgl_game\OMGL_Complete_Flask_Game\game interface.PNG) | 
+| ![Game Screen](static/game_interface.png) |
 
 
 ## 🙏 Contributing
@@ -93,4 +94,4 @@ Contributions are welcome! If you have any ideas, suggestions, or bug fixes, ple
 
 ---
 
-Enjoy the game! 🎉
+Enjoy the game! 🎉<!-- ...existing code... -->
