@@ -96,5 +96,5 @@ Open your web browser and go to `http://127.0.0.1:5000` to start playing!
 Contributions are welcome! If you have any ideas, suggestions, or bug fixes, please open an issue or submit a pull request.
 
 ---
-
+My name is Muhammad Aamish
 Enjoy the game! 🎉<!-- ...existing code... -->
