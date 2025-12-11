@@ -96,5 +96,6 @@ Open your web browser and go to `http://127.0.0.1:5000` to start playing!
 Contributions are welcome! If you have any ideas, suggestions, or bug fixes, please open an issue or submit a pull request.
 
 ---
+This is Aamish
 
 Enjoy the game! 🎉<!-- ...existing code... -->
