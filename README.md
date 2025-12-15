@@ -97,4 +97,4 @@ Contributions are welcome! If you have any ideas, suggestions, or bug fixes, ple
 
 ---
 
-Enjoy the game! 🎉<!-- ...existing code... -->
+Enjoy the game! 🎉
